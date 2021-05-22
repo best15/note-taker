@@ -1,11 +1,11 @@
 const express = require('express');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const port = 8000;
 
-const fs = require('fs');
-const { response } = require('express');
+const dbJson = require('./db/db.json')
 
 //static routes to public
 app.use(express.static('public'));
@@ -32,10 +32,21 @@ app.get('/*', (request, response) => {
 
 app.post('/api/notes', (request, response) => {
 
-    const newNotes = request.body;
-    console.log(newNotes);
-    fs.writeFile('./db/db.json', JSON.stringify(newNotes), (err) =>
-        err ? console.error(err) : console.log('Success!'));
+    const newNote = request.body;
+
+    fs.readFile('./db/db.json', 'utf8', (error, data) => {
+        if (error) console.error(error);
+        let dbJson = JSON.parse(data);
+
+        dbJson.push(newNote);
+
+        fs.writeFile('./db/db.json', JSON.stringify(dbJson), (err) =>
+            err ? console.error(err) : console.log('Success!'));
+
+    }
+
+    );
+
 
 })
 
