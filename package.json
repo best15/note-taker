@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/best15/note-taker#readme",
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "ids": "^1.0.0",
+    "node-id": "^1.1.2"
   }
 }
