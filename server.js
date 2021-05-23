@@ -9,24 +9,24 @@ const port = 8000;
 
 
 //static routes to public
-app.use(express.static('public'));
+app.use(express.static('Develop/public'));
 
 // Sets up the Express app to handle data parsing
 app.use(express.json());
 
 app.get('/notes', (request, response) => {
-    response.sendFile(path.join(__dirname, '/public/notes.html'));
+    response.sendFile(path.join(__dirname, '/Develop/public/notes.html'));
 
 })
 
 app.get('/api/notes', (request, response) => {
 
-    fs.readFile('./db/db.json', 'utf8', (error, data) => (error) ? console.log(error) : response.send(data));
+    fs.readFile('./Develop/db/db.json', 'utf8', (error, data) => (error) ? console.log(error) : response.send(data));
 
 });
 
 app.get('/*', (request, response) => {
-    response.sendFile(path.join(__dirname, '/public/index.html'));
+    response.sendFile(path.join(__dirname, '/Develop/public/index.html'));
 
 })
 
@@ -39,13 +39,14 @@ app.post('/api/notes', (request, response) => {
     newNote.id = id;
 
     //store db.json file content in a variable and add new note in the variable
-    fs.readFile('./db/db.json', 'utf8', (error, data) => {
+    fs.readFile('./Develop/db/db.json', 'utf8', (error, data) => {
         if (error) console.error(error);
         let dbJson = JSON.parse(data);
 
         dbJson.push(newNote);
+
         //write dbJson contents in db.json file    
-        fs.writeFile('./db/db.json', JSON.stringify(dbJson), (err) =>
+        fs.writeFile('./Develop/db/db.json', JSON.stringify(dbJson), (err) =>
             err ? console.error(err) : console.log('Saved in database.Success!'));
 
     });
