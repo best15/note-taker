@@ -12,7 +12,6 @@ const port = 8000;
 app.use(express.static('public'));
 
 // Sets up the Express app to handle data parsing
-app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/notes', (request, response) => {
@@ -35,7 +34,7 @@ app.post('/api/notes', (request, response) => {
 
     const newNote = request.body;
 
-    //append new id in new Note
+    //append new id in new Notes
     const id = nodeid(8);
     newNote.id = id;
 
@@ -47,7 +46,7 @@ app.post('/api/notes', (request, response) => {
         dbJson.push(newNote);
         //write dbJson contents in db.json file    
         fs.writeFile('./db/db.json', JSON.stringify(dbJson), (err) =>
-            err ? console.error(err) : console.log('Success!'));
+            err ? console.error(err) : console.log('Saved in database.Success!'));
 
     });
 
@@ -62,6 +61,7 @@ app.delete('/api/notes/:id', (request, response) => {
         if (error) console.error(error);
         let dbJson = JSON.parse(data);
 
+        //Search note with given id and delete the note
         dbJson.forEach(note => {
             if (note.id == deleteId) {
                 const index = dbJson.indexOf(note);
