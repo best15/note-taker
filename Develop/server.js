@@ -57,7 +57,7 @@ app.post('/api/notes', (request, response) => {
 
 app.delete('/api/notes/:id', (request, response) => {
     const deleteId = request.params.id;
-    console.log(deleteId);
+
     fs.readFile('./db/db.json', 'utf8', (error, data) => {
         if (error) console.error(error);
         let dbJson = JSON.parse(data);
@@ -69,7 +69,8 @@ app.delete('/api/notes/:id', (request, response) => {
             }
 
         });
-        console.log(dbJson);
+        fs.writeFile('./db/db.json', JSON.stringify(dbJson), (err) =>
+            err ? console.error(err) : console.log('Delete Success!'));
     });
     response.end();
 });
