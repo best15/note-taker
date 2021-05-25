@@ -4,7 +4,7 @@ const fs = require('fs');
 const nodeid = require('node-id');
 
 const app = express();
-const port = 8000;
+const PORT = process.env.PORT || 8000;
 
 
 
@@ -76,4 +76,4 @@ app.delete('/api/notes/:id', (request, response) => {
     response.end();
 });
 
-app.listen(port, (err) => err ? console.log(err) : console.log(`Server is listening at ${port} !!`));
+app.listen(PORT, (err) => err ? console.log(err) : console.log(`Server is listening at ${PORT} !!`));
