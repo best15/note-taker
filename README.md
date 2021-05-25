@@ -3,7 +3,7 @@
   [![License-MIT](https://img.shields.io/badge/license-MIT-green)](https://opensource.org/licenses/MIT) 
   # Note Taker
 
-  [Link to deployed application at Heroku](https://enigmatic-fjord-81157.herokuapp.com/)
+  [Link to deployed application at Heroku](https://note-taker-app2021.herokuapp.com/)
   ## Description
   A simple note taking app that allows user to view notes, input new notes, save it or delete it. This app was built with node.js(Using express).
 
